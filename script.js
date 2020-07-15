@@ -9,6 +9,13 @@ function initMap() {
     var map = new
         google.maps.Map(document.getElementById("map"), options);
 
+        // listen for click on map
+        google.maps.event.addListener(map, "click",
+        function(event) {
+            // add marker
+            addMarker({coords:event.latLng});
+        });
+
     // add marker
     /*
     var marker = new google.maps.Marker({
@@ -27,7 +34,32 @@ function initMap() {
 
     */
 
-    addMarker({
+
+    // Array of markers
+    var markers = [
+        {
+            coords: { lat: 36.1757, lng: -86.7556 },
+            iconImage: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
+            content: "<h3>Basement East</h3>"
+        },
+        { 
+            coords: { lat: 33.7410, lng: -84.3459 },
+            content: "<h3>The Earl</h3>"
+         },
+         { 
+            coords: { lat: 40.7206, lng: -73.9939 },
+            content: "<h3>Bowery Ballroom</h3>"
+        }
+        
+    ];
+
+    // loop through markers
+    for(var i = 0; i < markers.length; i++) {
+        // add marker
+        addMarker(markers[i]);
+    }
+
+   /* addMarker({
         coords: { lat: 36.1757, lng: -86.7556 },
         iconImage: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
         content: "<h3>Basement East</h3>"
@@ -39,7 +71,7 @@ function initMap() {
     addMarker({ 
         coords: { lat: 40.7206, lng: -73.9939 },
         content: "<h3>Bowery Ballroom</h3>"
-    });
+    }); */
 
     // add marker function
     function addMarker(props) {
